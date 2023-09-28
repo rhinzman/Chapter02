@@ -1,72 +1,89 @@
-//define two arrays for cities and population
+function initialize(){
+    cities();
+}
+function cities(){
+    //define two arrays for cities and population
 var cityPop = [
-	{city: 'Madison', population: 233209}
-	,{city: 'Milwaukee', population: 594833}
-	,{city: 'Green Bay', population: 104057}
-	,{city: 'Superior',population: 27244}
+	{ 
+		city: 'Madison',
+		population: 233209
+	},
+	{
+		city: 'Milwaukee',
+		population: 594833
+	},
+	{
+		city: 'Green Bay',
+		population: 104057
+	},
+	{
+		city: 'Superior',
+		population: 27244
+	}
 ];
-//create a function to add a table (columns and rows)
-//create a header row
-    var headerRow = document.createElement("tr");
-	headerRow.insertAdjacentHTML("beforeend","<th>City</th><th>Population</th>")
 
+//create the table element
+var table = document.createElement("table");
+//create a header and row
+	
+var headerRow = document.createElement("tr");
+//add the "City" and "Population" columns to the header row
+    headerRow.insertAdjacentHTML("beforeend","<th>City</th><th>Population</th>")
 
-function addColumns(cityPop){
-    
-    document.querySelectorAll("tr").forEach(function(row, i){
+    //add the row to the table
+    table.appendChild(headerRow);
 
-if (i == 0){
-
-    		row.insertAdjacntHTML('beforeend', '<th>City Size</th>');
-    	} else {
-
-    		var citySize;
-		}
-    		if (cityPop[i].population < 100000){
-    			citySize = 'Small';
-
-    		} else if (cityPop[i].population < 500000){
-    			citysize = 'Medium';
-
-    		} else {
-    			citySize = 'Large';
-    		};
-
-			row.insertAdjacntHTML = '<td' + citySize + '</td>';
-    	};
-    });
-};
-
-function addEvents(){
-
-	document.querySelector("table").addEventListener("mouseover"), function(){
-		
-		var color = ("rgb");
-
-		for (var i=0; i<3; i++){
-
-			var random = Math.round(Math.random() * 255);
-
-			color += "random";
-
-			if (i<2){
-				color += ",";
-			
-			} else {
-				color += ")";
-		};
-
-		document.querySelector("table").color = color;
-	}};
-
-	function clickme(){
-
-		alert('Hey, you clicked me!');
-	};
- //add the event listener
-	document.querySelector("table").addEventListener('click', clickme);
-
-document.querySelector("#mydiv").appendChild(table);
+//loop to add a new row for each city
+for(var i = 0; i < cityPop.length; i++){
+	//assign longer html strings to a variable
+	var rowHtml = "<tr><td>" + cityPop[i].city + "</td><td>" + cityPop[i].population + "</td></tr>";
+	//add the row's html string to the table
+	table.insertAdjacentHTML('beforeend',rowHtml);
 }
 
-document.addEventListener('DOMContentLoaded',initialize)
+document.querySelector("#mydiv").appendChild(table);
+
+
+document.querySelector('#mydiv').style.color = 'Blue';
+
+//change the text size and alignment
+document.querySelector('#mydiv').style.fontSize = '2em';
+document.querySelector('#mydiv').style.textAlign = 'left';
+//add the addEvent function
+addEvents();
+//add addListener function
+document.querySelector("table").addEventListener('click', clickme);
+}
+
+//click functionality to the table is added here
+function clickme(){
+
+alert('Hey, you clicked me!');
+}
+
+//Add the style color
+function addEvents(){
+
+document.querySelector("table").addEventListener("mouseover", function(){
+	
+	var color = "rgb(";
+
+	for (var i=0; i<3; i++){
+
+		var random = Math.round(Math.random() * 255);
+
+		color += random;
+
+		if (i<2){
+			color += ",";
+		
+		} else {
+			color += ")";
+	}
+	}
+
+	document.querySelector("table").style.color = color;
+});
+};
+
+document.addEventListener('DOMContentLoaded',initialize);

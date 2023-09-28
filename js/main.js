@@ -22,7 +22,7 @@ function cities(){
     {
         city: 'Superior',
         population: 27244
-    }]
+    }];
 
     //create the table element
     var table = document.createElement("table");
@@ -41,32 +41,52 @@ function cities(){
         //assign longer html strings to a variable
         var rowHtml = "<tr><td>" + cityPop[i].city + "</td><td>" + cityPop[i].population + "</td></tr>";
         //add the row's html string to the table
-		
-		 //change the text color
-    document.querySelector('#mydiv').style.color = 'red';
-
-    //change the text size and alignment
-    document.querySelector('#mydiv').style.fontSize = '2em';
-    document.querySelector('#mydiv').style.textAlign = 'left';
-
-    //get the text color and add it as text to the div
-    var thecolor = document.querySelector('#mydiv').style.color;
-    document.querySelector('#mydiv').insertAdjacentHTML('beforeend',thecolor);
-   
-
-    //get the text color and add it as text to the div
-    var thecolor = document.querySelector('#mydiv').style.color;
-    document.querySelector('#mydiv').insertAdjacentHTML('beforeend',thecolor);
-		
-		
-		
-		
-
-		
         table.insertAdjacentHTML('beforeend',rowHtml);
     }
 
     document.querySelector("#mydiv").appendChild(table);
+	
+
+document.querySelector('#mydiv').style.color = 'Blue';
+
+    //change the text size and alignment
+    document.querySelector('#mydiv').style.fontSize = '2em';
+    document.querySelector('#mydiv').style.textAlign = 'left';
+    //add the addEvent function
+    addEvents();
+    //add addListener function
+    document.querySelector("table").addEventListener('click', clickme);
 }
 
-document.addEventListener('DOMContentLoaded',initialize)
+//click functionality to the table is added here
+function clickme(){
+
+    alert('Hey, you clicked me!');
+}
+    
+
+function addEvents(){
+
+	document.querySelector("table").addEventListener("mouseover", function(){
+		
+		var color = "rgb(";
+
+		for (var i=0; i<3; i++){
+
+			var random = Math.round(Math.random() * 255);
+
+			color += random;
+
+			if (i<2){
+				color += ",";
+			
+			} else {
+				color += ")";
+		}
+		}
+
+		document.querySelector("table").style.color = color;
+	});
+};
+
+document.addEventListener('DOMContentLoaded',initialize);
